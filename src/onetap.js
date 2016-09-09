@@ -1,9 +1,13 @@
 "use strict;"
 //const Game = require('./game.js');
-import {Game} from './game';
+import {init, pause} from './game';
+import * as Player from './player';
 
 var canvas = document.getElementById('screen');
-var game = new Game(canvas, update, render);
+var game = init(canvas, update, render);
+
+var background = new Image();
+background.src = '/assests/Menu.png';
 
 
 /**
@@ -16,7 +20,8 @@ var game = new Game(canvas, update, render);
  */
 function update(elapsedTime) {
 
-  // TODO: Update the game objects
+    // TODO: Update the game objects
+    player.update(elapsedTime);
 }
 
 /**
@@ -28,5 +33,6 @@ function update(elapsedTime) {
 function render(elapsedTime, ctx) {
 
   // TODO: Draw the game objects using the supplied context
-
+    if(background) ctx.drawImage(background, 0, 0, canvas.width, canxas.height);
+    player.render(elapsedTime, ctx);
 }
